@@ -25,7 +25,7 @@ app.get("/cozinha/busca",async(req,res)=>{
   const r=await pool.query(
     `SELECT * FROM cozinha 
     WHERE prato ILIKE $1
-     AND quantidade ILIKE $2
+     AND CAST(quantidade AS TEXT) ILIKE $2
     ORDER BY id`,
     [
       `%${prato}%`,
