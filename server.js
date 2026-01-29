@@ -29,6 +29,19 @@ app.get("/cozinha/buscar", async (req, res) => {
 
   res.json(result.rows);
 });
+/* =======================
+   BUSCAR POR quantidade
+======================= */
+app.get("/cozinha/buscar", async (req, res) => {
+  const { quantidade } = req.query;
+
+  const result = await pool.query(
+    "SELECT * FROM cozinha WHERE quantidade ILIKE $1 ORDER BY quantidade",
+    [`%${quantidade}%`]
+  );
+
+  res.json(result.rows);
+});
 
 /* =======================
    CADASTRAR
