@@ -16,22 +16,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Servidor rodando");
 });
-/*busca avançada*/
-app.get("/cozinha/busca",async(req,res)=>{
-  const{
-    prato="",
-    quantidade=""
-  }=req.query;
-  const r=await pool.query(
-    `SELECT * FROM cozinha 
-    WHERE prato ILIKE $1
-     AND CAST(quantidade AS TEXT) ILIKE $2
-    ORDER BY id`,
-    [
-      `%${prato}%`,
-      `%${quantidade}%`
-    ]
-  );
-  res.json(r.rows);
-})
 
